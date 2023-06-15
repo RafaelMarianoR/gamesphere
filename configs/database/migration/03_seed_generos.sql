@@ -1,0 +1,16 @@
+INSERT INTO `generos` (`nome`) VALUES
+('Ação'),
+('Aventura'),
+('RPG'),
+('Estratégia'),
+('Esporte'),
+('Corrida'),
+('Tiro'),
+('Quebra-cabeça'),
+('Simulação'),
+('Terror'),
+('Aventura Iterativa'),
+('Survival Horror'),
+('Luta'),
+('Hack and Slash'),
+('Plataforma');

@@ -1,0 +1,75 @@
+-- CRIAÇÃO DO BANCO DE DADOS "gamesphere"
+CREATE DATABASE IF NOT EXISTS gamesphere;
+
+-- UTILIZAÇÃO DO BANCO DE DADOS "gamesphere"
+USE gamesphere;
+
+-- CRIAÇÃO DA TABELA "USUARIOS"
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255),
+  usuario VARCHAR(255),
+  email VARCHAR(255),
+  senha VARCHAR(255)
+);
+
+-- CRIAÇÃO DA TABELA "DESENVOLVEDORAS"
+CREATE TABLE IF NOT EXISTS desenvolvedoras (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255)
+);
+
+-- CRIAÇÃO DA TABELA "GÊNEROS"
+CREATE TABLE IF NOT EXISTS generos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255)
+);
+
+-- CRIAÇÃO DA TABELA "CONSOLES"
+CREATE TABLE IF NOT EXISTS consoles (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(255),
+  icone VARCHAR(255)
+);
+
+-- CRIAÇÃO DA TABELA "JOGOS"
+CREATE TABLE IF NOT EXISTS jogos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  id_desenvolvedora INT,
+  titulo VARCHAR(255),
+  descricao TEXT,
+  data_lancamento DATE,
+  FOREIGN KEY (id_desenvolvedora) REFERENCES desenvolvedoras(id) ON DELETE CASCADE
+);
+
+-- CRIAÇÃO DA TABELA "JOGOS_CONSOLES"
+CREATE TABLE IF NOT EXISTS jogos_consoles (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  id_jogo INT,
+  id_console INT,
+  FOREIGN KEY (id_jogo) REFERENCES jogos(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_console) REFERENCES consoles(id) ON DELETE CASCADE
+);
+
+
+-- CRIAÇÃO DA TABELA "JOGOS_GENEROS"
+CREATE TABLE IF NOT EXISTS jogos_generos (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  id_jogo INT,
+  id_genero INT,
+  FOREIGN KEY (id_jogo) REFERENCES jogos(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_genero) REFERENCES generos(id) ON DELETE CASCADE
+);
+
+-- CRIAÇÃO DA TABELA "AVALIACOES"
+CREATE TABLE IF NOT EXISTS avaliacoes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  id_usuario INT,
+  id_jogo INT,
+  id_console INT,
+  avaliacao INT,
+  comentario TEXT,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_jogo) REFERENCES jogos(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_console) REFERENCES consoles(id) ON DELETE CASCADE
+);
